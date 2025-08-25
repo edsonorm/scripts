@@ -1,0 +1,5 @@
+# Relatório diário às 08:00
+0 8 * * * /usr/bin/php /caminho/para/cups_report.php > /var/log/cups_daily_report.log
+
+# Relatório semanal às segundas 09:00
+0 9 * * 1 /usr/bin/php /caminho/para/cups_report.php > /var/log/cups_weekly_report.log
