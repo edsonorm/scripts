@@ -1,0 +1,27 @@
+#!/bin/bash
+# cups_report.sh - Coleta dados do CUPS
+
+REPORT_FILE="/tmp/cups_report_$(date +%Y%m%d_%H%M%S).txt"
+
+echo "=== RELATÓRIO CUPS - $(date) ===" > $REPORT_FILE
+echo "" >> $REPORT_FILE
+
+echo "=== IMPRESSORAS CONFIGURADAS ===" >> $REPORT_FILE
+lpstat -p >> $REPORT_FILE 2>&1
+echo "" >> $REPORT_FILE
+
+echo "=== TRABALHOS RECENTES ===" >> $REPORT_FILE
+lpstat -o >> $REPORT_FILE 2>&1
+echo "" >> $REPORT_FILE
+
+echo "=== ESTATÍSTICAS DE PÁGINAS ===" >> $REPORT_FILE
+if [ -f /var/log/cups/page_log ]; then
+    awk '{print $2 " " $7}' /var/log/cups/page_log | sort | uniq -c >> $REPORT_FILE
+fi
+echo "" >> $REPORT_FILE
+
+echo "=== STATUS DO SERVIÇO ===" >> $REPORT_FILE
+systemctl status cups >> $REPORT_FILE 2>&1
+echo "" >> $REPORT_FILE
+
+echo "Relatório gerado: $REPORT_FILE"
