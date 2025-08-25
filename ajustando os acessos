@@ -1,0 +1,4 @@
+sudo usermod -a -G lpadmin www-data  # Para usuário do Apache
+sudo chmod 644 /var/log/cups/page_log
+sudo chmod 644 /var/log/cups/access_log
+sudo chmod 644 /var/log/cups/error_log
