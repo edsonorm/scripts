@@ -1,4 +1,7 @@
 #!/bin/bash
+##Edson Mota##
+################
+
 # cups_report.sh - Coleta dados do CUPS
 
 REPORT_FILE="/tmp/cups_report_$(date +%Y%m%d_%H%M%S).txt"
